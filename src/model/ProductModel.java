@@ -3,11 +3,11 @@ package model;
 public class ProductModel {
 	
 	private Integer productId;
-	private  String ProductType;
-	private Double Productprice;
-	private String Productstatus;
-	private String ProductDescription;
-	
+	private  String ProductType;//in-out
+	private Double Productprice;//in-out
+	private String Productstatus;//out
+	private String ProductDescription;//in-out
+	private Integer ProductQuantity;//in
 	public ProductModel() {
 		
 	}
@@ -33,6 +33,13 @@ public class ProductModel {
 		Productstatus = productstatus;
 		ProductDescription = productDescription;
 	}
+	public Integer getProductId() {
+		return productId;
+	}
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+	
 	/**
 	 * @return the productType
 	 */
@@ -81,11 +88,18 @@ public class ProductModel {
 	public void setProductDescription(String productDescription) {
 		ProductDescription = productDescription;
 	}
-	public Integer getProductId() {
-		return productId;
+	
+	/**
+	 * @return the productQuantity
+	 */
+	public Integer getProductQuantity() {
+		return ProductQuantity;
 	}
-	public void setProductId(Integer productId) {
-		this.productId = productId;
+	/**
+	 * @param productQuantity the productQuantity to set
+	 */
+	public void setProductQuantity(Integer productQuantity) {
+		ProductQuantity = productQuantity;
 	}
 	
 	
