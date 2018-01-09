@@ -38,6 +38,7 @@ public class AllAccount {
 	private JTextField AddressText;
 	private JButton btnEditAccount;
 	private JButton btnDeleteAccount;
+
 	/**
 	 * Launch the application.
 	 */
@@ -66,6 +67,7 @@ public class AllAccount {
 	 */
 	 public void initialize() {
 		frame = new JFrame();
+		frame.setTitle("All Account");
 		frame.setBounds(100, 100, 732, 503);
 		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		
@@ -177,6 +179,7 @@ public class AllAccount {
 	}
 	private void initializeAddFrame() {
 		addAccountFrame = new JFrame();
+		addAccountFrame.setTitle("Add New Account");
 		addAccountFrame.setBounds(100, 100, 519, 350);
 		addAccountFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	
@@ -296,6 +299,7 @@ public class AllAccount {
 
 	private void initializeEditFrame(AccountModel accountModel) {
 		editAccountFrame = new JFrame();
+		editAccountFrame.setTitle("Edit Account");
 		editAccountFrame.setBounds(100, 100, 519, 350);
 		editAccountFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	
@@ -415,17 +419,5 @@ public class AllAccount {
 		editAccountFrame.getContentPane().setLayout(groupLayout);
 	}
 
-	/**
-	 * @return the accountList
-	 */
-	public ArrayList<AccountModel> getAccountList() {
-		return accountList;
-	}
-
-	/**
-	 * @param accountList the accountList to set
-	 */
-	public void setAccountList(ArrayList<AccountModel> accountList) {
-		this.accountList = accountList;
-	}
+	
 }

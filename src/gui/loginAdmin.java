@@ -7,20 +7,22 @@ import javax.swing.JFrame;
 //import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import controller.AccountController;
+
+import controller.LoginController;
 import model.UserModel;
 import gui.AllAccount;
 public class loginAdmin {
 
-	private JFrame frame;
+	private JFrame frmLoginPage;
 	private JTextField usernameText;
 	private JPasswordField passwordText;
 	private JFrame frmManagementpage;
@@ -32,7 +34,7 @@ public class loginAdmin {
 			public void run() {
 				try {
 					loginAdmin window = new loginAdmin();
-					window.frame.setVisible(true);
+					window.frmLoginPage.setVisible(true);
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,9 +54,10 @@ public class loginAdmin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 580, 399);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLoginPage = new JFrame();
+		frmLoginPage.setTitle("Login Page");
+		frmLoginPage.setBounds(100, 100, 580, 399);
+		frmLoginPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblUsername = new JLabel("username :*");
 		
@@ -70,7 +73,7 @@ public class loginAdmin {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				UserModel u=new UserModel();
-				AccountController c=new AccountController();
+				LoginController c=new LoginController();
 
 				u.setUsername(usernameText.getText());
 				u.setPassword(String.valueOf(passwordText.getPassword()));
@@ -80,7 +83,7 @@ public class loginAdmin {
 				if(	c.loginAdmin(u))
 				{
 					JOptionPane.showMessageDialog(null, "you  Login Successfully");
-					frame.setVisible(false);
+					frmLoginPage.setVisible(false);
 					initializeManagementPage();
 					frmManagementpage.setVisible(true);
 					
@@ -91,7 +94,7 @@ public class loginAdmin {
 				
 			}});
 				
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(frmLoginPage.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -126,17 +129,17 @@ public class loginAdmin {
 					.addContainerGap(72, Short.MAX_VALUE))
 		);
 		
-		frame.getContentPane().setLayout(groupLayout);
+		frmLoginPage.getContentPane().setLayout(groupLayout);
 	}
 		
 			
 private void initializeManagementPage() {
-			frmManagementpage = new JFrame();
-			frmManagementpage.setTitle("ManagementPage");
-			frmManagementpage.setBounds(100, 100, 601, 410);
-			frmManagementpage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    frmManagementpage = new JFrame();
+	    frmManagementpage.setTitle("Management Page");
+		frmManagementpage.setBounds(100, 100, 601, 410);
+		frmManagementpage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			
-			JButton btnRentprocess = new JButton("Rent Process");
+			JButton btnRentprocess = new JButton("RENT PROCESS");
 			btnRentprocess.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					rentProcess rentProcess=new rentProcess();
@@ -145,7 +148,7 @@ private void initializeManagementPage() {
 				}
 			});
 			
-			JButton btnAllAccount = new JButton("All Account");
+			JButton btnAllAccount = new JButton("ALL ACCOUNT");
 			btnAllAccount.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					AllAccount allAccount=new AllAccount();
@@ -154,33 +157,43 @@ private void initializeManagementPage() {
 				}
 			});
 			
-			JButton btnAllProduct = new JButton("All product");
+			JButton btnAllProduct = new JButton("ALL PROUDUCT");
+			btnAllProduct.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						AllProduct allProduct=new AllProduct();
+						allProduct.initialize();
+						allProduct.frmAllProduct.setVisible(true);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					
+				}
+			});	
 			GroupLayout groupLayout = new GroupLayout(frmManagementpage.getContentPane());
 			groupLayout.setHorizontalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-						.addContainerGap(141, Short.MAX_VALUE)
-						.addComponent(btnAllProduct)
-						.addGap(112)
-						.addComponent(btnAllAccount)
-						.addGap(142))
 					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(203)
-						.addComponent(btnRentprocess)
-						.addContainerGap(273, Short.MAX_VALUE))
+						.addGap(187)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(btnRentprocess)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnAllAccount, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnAllProduct, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+						.addContainerGap(191, Short.MAX_VALUE))
 			);
 			groupLayout.setVerticalGroup(
 				groupLayout.createParallelGroup(Alignment.LEADING)
-					.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-						.addContainerGap(178, Short.MAX_VALUE)
-						.addComponent(btnRentprocess)
-						.addGap(160))
 					.addGroup(groupLayout.createSequentialGroup()
-						.addGap(66)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnAllAccount)
-							.addComponent(btnAllProduct))
-						.addContainerGap(272, Short.MAX_VALUE))
+						.addGap(46)
+						.addComponent(btnAllAccount, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnAllProduct, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(btnRentprocess, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+						.addGap(46))
 			);
 			frmManagementpage.getContentPane().setLayout(groupLayout);
 			
